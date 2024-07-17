@@ -25,7 +25,7 @@ def save_image(img,path):
 
 
 def upload_foto(message: Message):
-    file_id = message.photo[0].file_id
+    file_id = message.photo[-1].file_id
     file_info = bot.get_file(file_id)
     downloaded_file = bot.download_file(file_info.file_path)
     save_image(downloaded_file, PATH + file_info.file_path[6:])
