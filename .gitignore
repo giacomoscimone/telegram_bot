@@ -318,4 +318,6 @@ $RECYCLE.BIN/
 .idea
 .env
 foto.jpeg
-log.txt
+log.*
+*.jpg
+*.jpeg
