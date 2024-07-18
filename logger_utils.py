@@ -1,7 +1,7 @@
 import logging
 
 
-def setuplog(log_path):
+def setuplog(log_path: str) -> None:
     logger = logging.getLogger('my_logger')
     logger.setLevel(logging.DEBUG)
 
