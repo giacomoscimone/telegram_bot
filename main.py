@@ -7,6 +7,7 @@ from io_utils import create_save_location, save_image, clean_up
 import telebot
 from logger_utils import setuplog
 import logging
+from commands import start, prediction, menu, help
 
 load_dotenv()
 
@@ -40,12 +41,24 @@ def upload_foto(message: Message) -> None:
         bot.reply_to(message, "errore server")
 
 
-@bot.message_handler(commands=['predizione'])
+@bot.message_handler(commands=[prediction])
 def class_prediction(message: Message) -> None:
 
     bot.reply_to(message, "seleziona la foto: ")
     logger.debug("risposta inviata")
     bot.register_next_step_handler(message=message, callback=upload_foto)
+
+
+@bot.message_handler(commands=[start])
+def start(message: Message):
+    logger.debug("comando start")
+    bot.reply_to(message, "Benvenuto")
+    bot.reply_to(message, menu)
+
+
+@bot.message_handler(commands=[help])
+def start(message: Message):
+    bot.reply_to(message, menu)
 
 
 if __name__ == "__main__":
