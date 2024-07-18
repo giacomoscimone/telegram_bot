@@ -7,7 +7,8 @@ from io_utils import create_save_location, save_image, clean_up
 import telebot
 from logger_utils import setuplog
 import logging
-from commands import start, prediction, menu, help
+from commands import START, PREDICTION, COMMANDS_LIST, HELP
+from telebot.util import quick_markup
 
 load_dotenv()
 
@@ -17,6 +18,11 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
+
+def show_menu(chat_id):
+    elenco = "\n/".join(COMMANDS_LIST)
+    bot.send_message(chat_id, f"Elenco comandi: \n/{elenco}")
+    
 
 def upload_foto(message: Message) -> None:
 
@@ -41,7 +47,7 @@ def upload_foto(message: Message) -> None:
         bot.reply_to(message, "errore server")
 
 
-@bot.message_handler(commands=[prediction])
+@bot.message_handler(commands=[PREDICTION])
 def class_prediction(message: Message) -> None:
 
     bot.reply_to(message, "seleziona la foto: ")
@@ -49,16 +55,18 @@ def class_prediction(message: Message) -> None:
     bot.register_next_step_handler(message=message, callback=upload_foto)
 
 
-@bot.message_handler(commands=[start])
+@bot.message_handler(commands=[START])
 def start(message: Message):
     logger.debug("comando start")
     bot.reply_to(message, "Benvenuto")
-    bot.reply_to(message, menu)
+    show_menu(message.chat.id)
+    logger.debug("elenco comandi inviato")
 
 
-@bot.message_handler(commands=[help])
-def start(message: Message):
-    bot.reply_to(message, menu)
+@bot.message_handler(commands=[HELP])
+def help(message: Message):
+    show_menu(message.chat.id)
+    logger.debug("elenco comandi inviato")
 
 
 if __name__ == "__main__":

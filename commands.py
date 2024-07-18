@@ -1,7 +1,7 @@
-start = 'start'
+START = 'start'
 
-help = 'help'
+HELP = 'help'
 
-prediction = 'predizione'
+PREDICTION = 'predizione'
 
-menu = "elenco comandi:" + "\n/"+help + "\n/"+start + "\n/"+prediction
+COMMANDS_LIST = [START, HELP, PREDICTION]
