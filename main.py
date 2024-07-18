@@ -22,13 +22,14 @@ bot = telebot.TeleBot(BOT_TOKEN)
 def show_menu(chat_id):
     elenco = "\n/".join(COMMANDS_LIST)
     bot.send_message(chat_id, f"Elenco comandi: \n/{elenco}")
-    
+
 
 def upload_foto(message: Message) -> None:
 
-    if isinstance(message.text, str):
+    if message.photo is None:
         bot.reply_to(message, "il messaggio inviato non e' una foto")
         return None
+
     file_id = message.photo[-1].file_id
     file_info = bot.get_file(file_id)
     img_path = file_info.file_path
