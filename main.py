@@ -18,6 +18,10 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 
 def upload_foto(message: Message) -> None:
+
+    if isinstance(message.text, str):
+        bot.reply_to(message, "il messaggio inviato non e' una foto")
+        return None
     file_id = message.photo[-1].file_id
     file_info = bot.get_file(file_id)
     img_path = file_info.file_path
