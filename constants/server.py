@@ -1,7 +1,8 @@
-HOST_PATH = 'http://localhost:'
+HOST_PATH = 'http://localhost'
 
-PORTA_SERVER = '8000'
+PORTA_SERVER = 8000
 
-PREDICT_FUNCTION = '/predict-image/'
+PREDICT_FUNCTION = 'predict-image'
 
-GRAYSCALE_FUNCTION = '/grayscale/'
+GRAYSCALE_FUNCTION = 'grayscale'
+RESIZE_FUNCTION = 'resize-image'
