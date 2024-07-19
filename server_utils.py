@@ -53,7 +53,7 @@ def grayscale_server(file_path: str) -> (str, float):
         return None
 
 
-def resize_server(file_path: str, altezza, larghezza) -> (str, float):
+def resize_server(file_path: str, altezza: int, larghezza: int) -> (str, float):
 
     file = read_file(SAVE_PATH + file_path)
 
